@@ -28,7 +28,7 @@ const selectSort = arr => {
 
 //Insertion Sort 
 const insertSort = arr => {
-  for(let i = 0; i < arr.length; i += 1){
+  for(let i = 1; i < arr.length; i += 1){
     for(let j = 0; j < i; j += 1){
       if(arr[i] < arr[j]){
         arr.splice(j, 0, arr[i]);
@@ -66,11 +66,15 @@ const shellSort = arr => {
   for(let dx = Math.floor(arr.length/2); dx > 0; dx = Math.floor(dx/2)){
     for(let i = 0; i < dx; i += 1){
       for(let j = i + dx; j < arr.length; j += dx){
-        if(arr[j] < arr[i]){
-          const temp = arr[i];
-          arr[i] = arr[j];
-          arr[j] = temp;
+        let k = j
+
+        const base = arr[k];
+        while(k > i && base < arr[k - dx]) {
+          arr[k] = arr[k - dx];
+          k -= dx;
         }
+        arr[k] = base;
+
       }
     }
   }
@@ -79,7 +83,7 @@ const shellSort = arr => {
 
 //Quick Sort
 const quickSort = arr => {
-  if(arr.length <= 1) return arr;
+  if(arr.length < 2) return arr;
   const pivot = arr[0];
   const left = [];
   const right = [];
@@ -94,6 +98,35 @@ const quickSort = arr => {
   return quickSort(left).concat(pivot, quickSort(right));
 }
 
+//In-place Quick Sort
+const _inPlaceQuickSort = (arr, left, right) => {
+  if(left >= right) { return arr; }
+
+  const base = arr[left];
+  let i = left;
+  let j = right;
+  while(i < j){
+    while(i < j && arr[j] >= base){ 
+      j-= 1; 
+    }
+    arr[i] = arr[j];
+    while(i < j && arr[i] <= base){
+     i+= 1; 
+    }
+    arr[j] = arr[i];
+  }
+  arr[i] = base;
+
+  arr = _inPlaceQuickSort(arr, left, i-1);
+  arr = _inPlaceQuickSort(arr, i+1, right);
+
+  return arr;
+}
+
+const InPlaceQuickSort = arr => {
+  return _inPlaceQuickSort(arr, 0, arr.length - 1);
+}
+
 export {
   bubbleSort,
   selectSort,
@@ -101,4 +134,5 @@ export {
   mergeSort,
   shellSort,
   quickSort,
+  InPlaceQuickSort,
 }

@@ -24,7 +24,7 @@ const devServer = {
   https: true,
   open: false,
   host: "0.0.0.0",
-  port: 3000,
+  port: 3030,
 }
 
 const defaultSetting = {
@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
   } = Object.assign(defaultSetting, argv);
 
   const htmlTemplate = new HtmlWebpackPlugin({
-    title: '泥馬霸氣符咒編輯器',
+    title: 'Algorithm Animation',
     template: `template/${page}.ejs`,
   })
 
