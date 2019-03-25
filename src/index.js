@@ -4,16 +4,6 @@ import * as d3 from 'd3';
 import 'd3-selection-multi';
 
 import {
-  bubbleSort,
-  selectSort,
-  insertSort,
-  mergeSort,
-  shellSort,
-  quickSort,
-  InPlaceQuickSort,
-} from './sort';
-
-import {
   bubbleStep,
   selectStep,
   insertStep,
@@ -28,6 +18,11 @@ import {
   rgbToHex,
   genRandomRGBArray,
 } from './utilities'
+
+import {
+  hammingWeight,
+  countBits,
+} from './exam/binary'
 
 const colorBlocks = document.querySelector('.color-blocks');
 
@@ -67,6 +62,6 @@ const test1 = genRandomRGBArray(n);
 let stepTimer
 
 //bubbleStep(test1, () => { drawColorArray(colorBlocks, test1) });
-shellStep(test1, () => { drawColorArray(colorBlocks, test1) }, stepTimer);
+//shellStep(test1, () => { drawColorArray(colorBlocks, test1) }, stepTimer);
 
-
+console.log(countBits(15));
