@@ -1,42 +1,18 @@
-// Leetcode Sum of Two Integers
-const getSum = (a, b) => {
-  let c;
-
-  while(b != 0){
-    c = a & b;
-    a = a ^ b;
-    b = c << 1;
+// Leetcode - 70 Climbing Stairs
+const climbStairs = n => {  
+  if( n <= 2){
+    if(n === 2) return 2;
+    if(n === 1) return 1;
+    return 0;
+  }else{
+    const m = [1,2];
+    for(let i = 2; i < n; i += 1){
+      m[i] = m[i-1] + m[i-2];
+    }
+    return m[n-1];
   }
-
-  return a;
-}
-
-// Leetcode Hamming weight
-const hammingWeight = n => {
-  return n.toString(2).split('').filter( d => d === '1').length;
-};
-
-// Leetcode Counting Bits
-const countBits = num => {
-  const result = [0];
-  for(let i = 1; i <= num; i += 1){
-    result.push(i.toString(2).split('').filter( d => d === '1').length);
-  }
-  return result;
-};
-
-// Leetcode Missing Number
-const missingNumber = function(nums) {
-  const max = nums.length;
-  let result = (1 + max)*max/2;
-  for(let i = 0; i < nums.length; i += 1){
-    result -= [nums[i]];
-  }
-  return result;
 };
 
 export {
-  getSum,
-  hammingWeight,
-  countBits,
+  climbStairs,
 }
