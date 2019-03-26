@@ -20,9 +20,9 @@ import {
 } from './utilities'
 
 import {
-  hammingWeight,
-  countBits,
-} from './exam/binary'
+  coinChange,
+  lengthOfLIS,
+} from './exam/dynamicProgramming'
 
 const colorBlocks = document.querySelector('.color-blocks');
 
@@ -64,4 +64,14 @@ let stepTimer
 //bubbleStep(test1, () => { drawColorArray(colorBlocks, test1) });
 //shellStep(test1, () => { drawColorArray(colorBlocks, test1) }, stepTimer);
 
-console.log(countBits(15));
+const coins = [186,419,83,408];
+const amount = 6249;
+
+//const coins = [1,2,3,4];
+//const amount = 4;
+//console.log(coinChange(coins, amount));
+
+//const list = [10,9,2,5,3,7,101,18]
+//const list = [10,9,2,5,3,4]
+const list = [4,10,4,3,8,9]
+console.log(lengthOfLIS(list));
