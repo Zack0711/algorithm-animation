@@ -29,6 +29,7 @@ const coinChange = (coins, amount) => {
 };
 
 //Leetcode - 300 Longest Increasing Subsequence
+//O(N^2)
 const lengthOfLIS = nums => {
   if(nums.length === 0) return 0
 
@@ -47,30 +48,50 @@ const lengthOfLIS = nums => {
   }
 
   return max;
+};
 
-
-  /*
-  if(nums.length === 0) return 0
-  const list = [];
-  let max = 1;
-
-  for(let i = 0; i < nums.length; i += 1){
-    const a = nums[i];
-    for(let j = 0; j < list.length; j += 1){
-      const b = list[j];
-      const last = b[b.length - 1];
-      if(a > last) b.push(a);
-      if(a < last && b.length > 1 && a > b[b.length - 2]) b[b.length - 1] = a;
-      if(b.length > max) max = b.length;
+// Leetcode - 139 Word Break
+const wordBreak = (s, wordDict) => {
+  const sBreak = [];
+  const wordCompare = (list, wordDict) => {
+    const result = {
+      list: [],
+      wordDict: [],
     }
-    list[i] = [a];
+
+    const wMap = {}
+
+    for(let i = 0; i < list.length; i += 1){
+      const n = list[i];
+      for(let j = 0; j < wordDict.length; j += 1){
+        const w = wordDict[j];
+        const m = n + w.length
+        if(w === s.slice(n, m)){
+          if(sBreak[m] === undefined){
+            sBreak[m] = 1;
+            if(m === s.length) return result; 
+            result.list.push(m);
+          }
+        }
+        if(m < s.length && wMap[w] === undefined){
+          result.wordDict.push(w);
+          wMap[w] = 1;
+        }
+      }
+    }
+    return result;
   }
-  return max
-  */
+
+  let result = wordCompare([0], wordDict);
+  while(result.list.length > 0 && sBreak[s.length] === undefined){
+    result = wordCompare(result.list, result.wordDict);
+  }
+  return sBreak[s.length] ? true : false;
 };
 
 export {
   climbStairs,
   coinChange,
   lengthOfLIS,
+  wordBreak,
 }
