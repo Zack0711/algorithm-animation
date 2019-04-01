@@ -12,6 +12,7 @@ const climbStairs = n => {
     return m[n-1];
   }
 };
+
 // Leetcode - 322. Coin Change
 const coinChange = (coins, amount) => {
    const count = [0];
@@ -89,9 +90,55 @@ const wordBreak = (s, wordDict) => {
   return sBreak[s.length] ? true : false;
 };
 
+// Leetcode - 474. Ones and Zeroes
+const findMaxForm = (strs, m, n) => {
+  const result = [[[0, {}]]];
+  const strsMap = {};
+
+  for(let i = 0; i <= m; i += 1){
+    if(result[i] === undefined) result[i] = [];
+    for(let j = 0; j <= n; j += 1){
+      if(result[i][j] === undefined) result[i][j] = [0, {}];
+
+      let max = result[i][j][0];
+      let map = result[i][j][1];
+
+      for(let k = 0; k < strs.length; k += 1){
+        const str = strs[k];
+        const key = str+k
+        if(strsMap[key] === undefined){
+          const str_m =  str.replace(/1+/g, '').length;
+          const str_n =  str.replace(/0+/g, '').length;
+          strsMap[key] = [str_m, str_n]
+        }
+
+        const s_m = strsMap[key][0];
+        const s_n = strsMap[key][1];
+
+        if( i - s_m >=0 && j - s_n >= 0){
+          const prev = result[i - s_m][j - s_n];
+          const p_map =  prev[1];
+          const p_v = p_map[key] ? prev[0] : prev[0] + 1;
+
+          if(p_v > max){
+            const newMap = {};
+            newMap[key] = strsMap[key];
+            max = p_v;
+            map = Object.assign(newMap, p_map);
+          }
+          result[i][j][0] = max;
+          result[i][j][1] = map;
+        }
+      }
+    }
+  }
+  return result[m][n][0]
+};
+
 export {
   climbStairs,
   coinChange,
   lengthOfLIS,
   wordBreak,
+  findMaxForm,
 }
