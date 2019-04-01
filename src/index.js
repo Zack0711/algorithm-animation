@@ -22,7 +22,13 @@ import {
 import {
   coinChange,
   lengthOfLIS,
+  wordBreak,
+  findMaxForm,
 } from './exam/dynamicProgramming'
+
+import {
+  cloneGraph,
+} from './exam/graph'
 
 const colorBlocks = document.querySelector('.color-blocks');
 
@@ -55,7 +61,7 @@ const drawColorArray = (canvasBlock, arr) => {
     })
 }
 
-const n = 60
+//const n = 60
 const test1 = genRandomRGBArray(n);
 //sortTest(test1, shellSort, 'shell');
 
@@ -73,5 +79,24 @@ const amount = 6249;
 
 //const list = [10,9,2,5,3,7,101,18]
 //const list = [10,9,2,5,3,4]
-const list = [4,10,4,3,8,9]
-console.log(lengthOfLIS(list));
+//const list = [4,10,4,3,8,9]
+//console.log(lengthOfLIS(list));
+
+const s = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab';
+const wordDict = ['a', 'aa', 'aaa', 'aaaa', 'aaaaa', 'aaaaaa', 'aaaaaaa', 'aaaaaaaa'];
+
+//console.log(wordBreak(s, wordDict));
+
+const node = {"$id":"1","neighbors":[{"$id":"2","neighbors":[{"$ref":"1"},{"$id":"3","neighbors":[{"$ref":"2"},{"$id":"4","neighbors":[{"$ref":"3"},{"$ref":"1"}],"val":4}],"val":3}],"val":2},{"$ref":"4"}],"val":1}
+
+//console.log(node, cloneGraph(node));
+
+//const strs = ["10", "0001", "111001", "1", "0"];
+//const m = 5;
+//const n = 3;
+
+const strs = ["0", "0", "1", "1"];
+const m = 2;
+const n = 2;
+
+console.log(findMaxForm(strs, m, n));
